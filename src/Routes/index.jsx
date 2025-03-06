@@ -1,17 +1,13 @@
-import {
-  createBrowserRouter,
-  createRoutesFromElements,
-  Route,
-} from "react-router-dom";
-import Markup from "../Layout";
+import { createBrowserRouter, createRoutesFromElements, Route } from "react-router-dom";
 import Home from "../pages/Home";
 import Genre from "../pages/Genre";
-import Game from "../pages/Game";
+import Game from "../Pages/Game";
+import Navbar from "../Layout/Navbar";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path="/" element={<Markup />}>
-    <Route path="/" element={<Home />} />
+    <Route element={<Navbar />}>
+      <Route path="/" element={<Home />} />
       <Route path="games/genre" element={<Genre />} />
       <Route path="games/game-name" element={<Game />} />
     </Route>
@@ -19,4 +15,3 @@ const router = createBrowserRouter(
 );
 
 export default router;
-
