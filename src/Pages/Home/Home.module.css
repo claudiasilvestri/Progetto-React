@@ -1,16 +1,32 @@
-/* Home.modules.css */
 .games_wrapper {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
+    justify-content: center;
+    padding: 20px;
 }
 
 .game_card {
-    border: 1px solid #ccc;
-    padding: 10px;
+    border: 1px solid #444;
+    border-radius: 10px;
+    padding: 15px;
+    background-color: #222;
+    color: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    max-width: 250px;
+    position: relative;
+    overflow: hidden;
+}
+
+.game_card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(255, 255, 255, 0.3);
 }
 
 .game_image {
     width: 100%;
     height: auto;
+    border-radius: 8px;
 }
+
