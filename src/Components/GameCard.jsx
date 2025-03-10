@@ -1,6 +1,7 @@
+import { useState } from "react";
+import "./GameCard.css";
+import GameImage from "./GameImage";
 
-import { useState } from "react"; 
-import "./GameCard.css"
 export default function GameCard({ game }) {
   const [hidden, setHidden] = useState(true);
 
@@ -10,15 +11,19 @@ export default function GameCard({ game }) {
       onMouseLeave={() => setHidden(true)}
       className="game_card"
     >
-      <img className="game_image" src={game.background_image} alt={game.name} />
-      <small>Genres: {game.genres ? game.genres.map((g) => g.name).join(", ") : "N/A"}</small>
-      <h4>{game.name}</h4>
-      {hidden && <small>Read more...</small>}
-      {!hidden &&
-      <div>
-        serie di info...
-      </div>
-      }
+      <GameImage image={game.background_image} />
+      <small className="game_genres">
+        Genres: {game.genres ? game.genres.map((g) => g.name).join(", ") : "N/A"}
+      </small>
+      <h4 className="game_title">{game.name}</h4>
+      {hidden ? (
+        <small className="read_more">Read more...</small>
+      ) : (
+        <div className="game_info">serie di info...</div>
+      )}
     </article>
   );
 }
+
+
+
