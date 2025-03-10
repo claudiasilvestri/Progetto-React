@@ -2,13 +2,12 @@ import { createBrowserRouter, createRoutesFromElements, Route } from "react-rout
 import Home from "../pages/Home";
 import Genre from "../pages/Genre";
 import Game from "../pages/Game";
-import Navbar from "../Layout";
-
+import Navbar from '../Components/Header'; 
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path="/" element={<Navbar />}>
-      <Route index element={<Home />} />
+    <Route element={<Navbar />}>  
+      <Route path="/" element={<Home />} />
       <Route path="games/genre" element={<Genre />} />
       <Route path="games/game-name" element={<Game />} />
     </Route>
@@ -16,3 +15,6 @@ const router = createBrowserRouter(
 );
 
 export default router;
+
+
+

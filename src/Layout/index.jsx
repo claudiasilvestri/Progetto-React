@@ -1,19 +1,11 @@
-import { Link, Outlet } from "react-router-dom";
+import { Outlet } from "react-router";
+import Header from '../Components/Header'
 
-const Navbar = () => {
+export default function Markup () {
   return (
-    <nav className="navbar">
-      <ul className="nav-links">
-        <li><Link to="/">Home</Link></li>
-        <li><Link to="/games/genre">Genre</Link></li> 
-        <li><Link to="/games/game-name">Game</Link></li>
-      </ul>
-      <Outlet /> 
-    </nav>
-  );
-};
-export default Navbar;
-
-
-
-
+    <div ClassName="container">
+      <Header />
+      <Outlet />
+    </div>
+  )
+}

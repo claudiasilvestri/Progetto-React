@@ -1,6 +1,6 @@
 import { useState } from "react";
-import "./GameCard.css";
 import GameImage from "./GameImage";
+import "../Layout/GameCard.css";
 
 export default function GameCard({ game }) {
   const [hidden, setHidden] = useState(true);
@@ -24,6 +24,7 @@ export default function GameCard({ game }) {
     </article>
   );
 }
+
 
 
 
