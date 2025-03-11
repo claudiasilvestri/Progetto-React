@@ -1,46 +1,66 @@
 .navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #222;
-    padding: 15px 20px;
-    color: white;
-    position: relative;
-    z-index: 10;
-  }
-  
-  .nav-links {
-    list-style: none;
-    display: flex;
-    gap: 20px;
-  }
-  
-  .nav-links li {
-    display: inline-block;
-  }
-  
-  .nav-links a {
-    color: white;
-    text-decoration: none;
-    padding: 10px;
-    display: block;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-  }
-  
-  .nav-links a:hover {
-    background-color: #444;
-    border-radius: 5px;
-  }
-  
-  .navbar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 10;
-  }
-  
-  .container {
-    margin-top: 80px;
-  }
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: rgba(26, 26, 26, 0.9);
+  backdrop-filter: blur(8px);
+  color: white;
+}
+
+.navbar-left .navbar-brand {
+  font-size: 24px;
+  font-weight: bold;
+  color: #f20065;
+  text-decoration: none;
+}
+
+.navbar-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-grow: 1;
+  margin: 0 20px;
+}
+
+.search-bar {
+  padding: 5px;
+  font-size: 14px;
+  border: 2px solid #ddd;
+  border-radius: 4px;
+  width: 240px;
+}
+
+.search-btn {
+  padding: 5px 12px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-left: 4px;
+}
+
+.search-btn:hover {
+  background-color: #45a049;
+}
+
+.navbar-right {
+  display: flex;
+}
+
+.auth-btn {
+  padding: 8px 16px;
+  margin-left: 10px;
+  background-color: #f20065;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.auth-btn:hover {
+  background-color: #e10053;
+}

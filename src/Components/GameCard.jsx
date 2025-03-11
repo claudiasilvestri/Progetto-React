@@ -12,19 +12,23 @@ export default function GameCard({ game }) {
       className="game_card"
     >
       <GameImage image={game.background_image} />
-      <small className="game_genres">
-        Genres: {game.genres ? game.genres.map((g) => g.name).join(", ") : "N/A"}
-      </small>
       <h4 className="game_title">{game.name}</h4>
       {hidden ? (
         <small className="read_more">Read more...</small>
       ) : (
-        <div className="game_info">serie di info...</div>
+        <div className="game_info">
+          <p><strong>Release Date:</strong> {game.released || "N/A"}</p>
+          <p><strong>Rating:</strong> {game.rating || "N/A"} / 5</p>
+          <p><strong>Reviews Count:</strong> {game.reviews_count || 0}</p>
+          <p>
+            <strong>Platforms:</strong>{" "}
+            {game.parent_platforms
+              ? game.parent_platforms.map((p) => p.platform.name).join(", ")
+              : "N/A"}
+          </p>
+        </div>
       )}
     </article>
   );
 }
-
-
-
 

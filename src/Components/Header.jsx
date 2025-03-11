@@ -1,18 +1,32 @@
-import { Link, Outlet } from "react-router-dom";
+import React from 'react';
+import { Link, Outlet } from 'react-router-dom';
+import '../Layout/Header.css'; 
 
 const Navbar = () => {
   return (
-    <nav className="navbar">
-      <ul className="nav-links">
-        <li><Link to="/">Home</Link></li>
-        <li><Link to="/games/genre">Genre</Link></li>
-        <li><Link to="/games/game-name">Game</Link></li>
-      </ul>
-      <Outlet /> 
-    </nav>
+    <div>
+      <nav className="navbar">
+        <div className="navbar-left">
+          <Link to="/" className="navbar-brand">GameVerse</Link>
+        </div>
+
+        <div className="navbar-center">
+          <input type="text" className="search-bar" placeholder="Search..." />
+          <button className="search-btn">Search</button>
+        </div>
+
+        <div className="navbar-right">
+          <Link to="/login" className="auth-btn">Login</Link>
+          <Link to="/register" className="auth-btn">Register</Link>
+        </div>
+      </nav>
+      
+      <Outlet />
+    </div>
   );
 };
 
 export default Navbar;
+
 
 
