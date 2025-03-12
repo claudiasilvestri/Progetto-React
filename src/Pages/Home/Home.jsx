@@ -1,6 +1,6 @@
 import styles from "./Home.module.css"; 
 import GameCard from "../../components/GameCard";
-
+import "../Layout/Sidebar.css";
 export default function Home({ games }) {
   return (
     <div className={styles.container}>

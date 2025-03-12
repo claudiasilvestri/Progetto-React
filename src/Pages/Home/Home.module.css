@@ -18,3 +18,60 @@ html, body {
     justify-content: center;
   }
   
+  .main {
+    width: 100%;
+    display:flex;
+  }
+
+ .sidebar {
+    width: 30%;
+  }
+  
+  .games {
+  width: 70%;
+  }
+
+.sidebar {
+  background: #ffffffb3; 
+  padding: 20px;
+  width: 250px;
+  border-radius: 10px;
+}
+
+.dropdown {
+  margin-top: 10px;
+}
+
+.dropdown summary {
+  font-weight: bold;
+  color:#4CAF50; 
+  font-size: 24px; 
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.dropdown summary::after {
+  content: " ▼"; 
+  font-size: 18px; 
+  margin-left: 10px;
+}
+
+.dropdown ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.dropdown li {
+  font-weight: bold;
+  color: #171616; 
+  padding: 10px 0;
+  font-size: 18px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.dropdown li:last-child {
+  border-bottom: none;
+}
+

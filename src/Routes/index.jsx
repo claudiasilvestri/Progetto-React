@@ -4,6 +4,7 @@ import Genre from "../pages/Genre";
 import Game from "../pages/Game";
 import Navbar from '../Components/Header'; 
 
+
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route element={<Navbar />}>  
