@@ -1,16 +1,21 @@
 import { useState } from "react";
+import { useNavigate } from "react-router";
 import GameImage from "./GameImage";
 import "../Layout/GameCard.css";
 
 export default function GameCard({ game }) {
+  const navigate = useNavigate ();
   const [hidden, setHidden] = useState(true);
+  const genres = game.genres.map((genre) => genre.id).join(',');
 
   return (
     <article
-      onMouseEnter={() => setHidden(false)}
-      onMouseLeave={() => setHidden(true)}
-      className="game_card"
+className="game_card"
+onMouseEnter={() => setHidden(false)}
+onMouseLeave={() => setHidden(true)}
+onClick={() => navigate(`/games/${game.id}/${game.name}`)}
     >
+      
       <GameImage image={game.background_image} />
       <h4 className="game_title">{game.name}</h4>
       {hidden ? (

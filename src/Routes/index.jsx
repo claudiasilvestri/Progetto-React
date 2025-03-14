@@ -2,6 +2,7 @@ import { createBrowserRouter, createRoutesFromElements, Route } from "react-rout
 import Home from "../pages/Home";
 import Genre from "../pages/Genre";
 import Game from "../pages/Game";
+import Platform from "../Pages/Platform";
 import Navbar from '../Components/Header'; 
 
 const router = createBrowserRouter(
@@ -9,13 +10,11 @@ const router = createBrowserRouter(
     <Route element={<Navbar />}>
       <Route path="/" element={<Home />} />
       <Route path="games/genre/:id" element={<Genre />} /> 
-      <Route path="games/game/:id" element={<Game />} />  
+      <Route path="games/:id/:game" element={<Game />} />  
+      <Route path="platform/:platformId" element={<Platform />} />
     </Route>
   )
 );
 
 export default router;
-
-
-
 

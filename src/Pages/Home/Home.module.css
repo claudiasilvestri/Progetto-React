@@ -1,77 +1,78 @@
 html, body {
-    height: 100%; 
-    margin: 0;
-    overflow-x: hidden; 
+  height: 100%; 
+  margin: 0;
+  overflow-x: hidden; 
 }
-  
-    .container {
-    min-height: 100vh;
-    overflow-y: auto;
-    padding: 20px;
-    box-sizing: border-box;
-  }
-  
-  .games_wrapper {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: center;
-  }
-  
-  .main {
-    width: 100%;
-    display:flex;
-  }
 
- .sidebar {
-    width: 30%;
-  }
-  
-  .games {
-  width: 70%;
-  }
+  .container {
+  min-height: 100vh;
+  overflow-y: auto;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.games_wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.main {
+  width: 100%;
+  display:flex;
+}
 
 .sidebar {
-  background: #ffffffb3; 
-  padding: 20px;
-  width: 250px;
-  border-radius: 10px;
+  width: 30%;
+}
+
+.games {
+width: 70%;
+}
+
+.sidebar {
+background: #ffffffb3; 
+padding: 20px;
+width: 250px;
+border-radius: 10px;
 }
 
 .dropdown {
-  margin-top: 10px;
+margin-top: 10px;
 }
 
 .dropdown summary {
-  font-weight: bold;
-  color:#4CAF50; 
-  font-size: 24px; 
-  cursor: pointer;
-  display: flex;
-  align-items: center;
+font-weight: bold;
+color:#4CAF50; 
+font-size: 24px; 
+cursor: pointer;
+display: flex;
+align-items: center;
 }
 
 .dropdown summary::after {
-  content: " ▼"; 
-  font-size: 18px; 
-  margin-left: 10px;
+content: " ▼"; 
+font-size: 18px; 
+margin-left: 10px;
 }
 
 .dropdown ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+list-style: none;
+padding: 0;
+margin: 0;
 }
 
 .dropdown li {
-  font-weight: bold;
-  color: #171616; 
-  padding: 10px 0;
-  font-size: 18px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+font-weight: bold;
+color: #171616; 
+padding: 10px 0;
+font-size: 18px;
+border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .dropdown li:last-child {
-  border-bottom: none;
+border-bottom: none;
 }
+
 
