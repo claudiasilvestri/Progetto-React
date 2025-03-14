@@ -8,32 +8,29 @@ export default function Platform() {
   const { platformID } = useParams(); 
 
   useEffect(() => {
-    const fetchPlatform = async () => {
+    const fetchPlatforms = async () => {
       const response = await fetch(
-      `https://api.rawg.io/api/platforms?key=c6d86a1b0cfc40fa8902c3705680c2ed&platforms=${platformId}&page=1`
+        `https://api.rawg.io/api/games?key=c6d86a1b0cfc40fa8902c3705680c2ed&platforms=${platformID}&page=1`
       );
       const json = await response.json();
       setGames(json.results);
     };
 
-    fetchPlatform();
-  }, [platformId]); 
+    fetchPlatforms();
+  }, [platformID]); 
 
   return (
     <div className={styles.main}>
       <div className={styles.heading}>
-        <h1>Giochi per piattaforma</h1>
       </div>
       <div className={styles.games}>
-        {games.length > 0 ? (
+        {games.length > 0 && 
           games.map((game) => (
             <div key={game.id} className={styles.gameCard}>
               <GameCard game={game} />
             </div>
           ))
-        ) : (
-          <p>Nessun gioco trovato per questa piattaforma.</p>
-        )}
+        }
       </div>
     </div>
   );

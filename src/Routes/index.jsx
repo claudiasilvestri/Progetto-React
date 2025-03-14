@@ -11,7 +11,7 @@ const router = createBrowserRouter(
       <Route path="/" element={<Home />} />
       <Route path="games/genre/:id" element={<Genre />} /> 
       <Route path="games/:id/:game" element={<Game />} />  
-      <Route path="platform/:platformId" element={<Platform />} />
+      <Route path="/games/platform/:platformID" element={<Platform />} />
     </Route>
   )
 );
