@@ -9,13 +9,12 @@ export default function Sidebar() {
   useEffect(() => {
     const fetchGenresAndPlatforms = async () => {
       try {
-        
         const genresResponse = await fetch(
           "https://api.rawg.io/api/genres?key=c6d86a1b0cfc40fa8902c3705680c2ed&dates=2024-01-01,2024-12-31"
         );
         const genresjson = await genresResponse.json();
         setGenres(genresjson.results);
-       
+  
         const platformsResponse = await fetch(
           "https://api.rawg.io/api/platforms?key=c6d86a1b0cfc40fa8902c3705680c2ed&dates=2024-01-01,2024-12-31"
         );
@@ -27,8 +26,8 @@ export default function Sidebar() {
     };
 
     fetchGenresAndPlatforms();
-  }, []); 
-
+  }, []);
+  
   return (
     <div className={styles.sidebar}>
       <details className={styles.dropdown}>

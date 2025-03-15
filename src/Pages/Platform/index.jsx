@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import styles from "../Home/Home.module.css";
+import { useParams, useNavigate } from "react-router-dom"; 
+import styles from './Platform.module.css';
 import GameCard from "../../components/GameCard";
+import Sidebar from "../../components/Sidebar";
 
 export default function Platform() {
   const [games, setGames] = useState([]);
-  const { platformID } = useParams(); 
+  const { platformID } = useParams();
+  const navigate = useNavigate(); 
 
   useEffect(() => {
     const fetchPlatforms = async () => {
@@ -17,22 +19,28 @@ export default function Platform() {
     };
 
     fetchPlatforms();
-  }, [platformID]); 
+  }, [platformID]);
+
+  const handleGoHome = () => {
+    navigate('/'); 
+  };
 
   return (
-    <div className={styles.main}>
-      <div className={styles.heading}>
+    <div className={`${styles.main} ${styles.container}`}>
+      <Sidebar />
+      <div className={styles.games_wrapper}>
+        {games.map((game) => (
+          <div key={game.id} className={styles.gameCard}>
+            <GameCard game={game} />
+          </div>
+        ))}
       </div>
-      <div className={styles.games}>
-        {games.length > 0 && 
-          games.map((game) => (
-            <div key={game.id} className={styles.gameCard}>
-              <GameCard game={game} />
-            </div>
-          ))
-        }
-      </div>
+      <button onClick={handleGoHome} className={styles.homeButton}>Home</button>
     </div>
   );
 }
+
+
+
+
 

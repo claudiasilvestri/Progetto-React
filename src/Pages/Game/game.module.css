@@ -1,0 +1,99 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap');
+
+.centeredContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  height: 100vh;
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 20px;
+  margin-top: 50px;
+}
+
+.gameCard {
+  background-color: rgba(255, 255, 255, 0.3);
+  padding: 20px;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 800px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.gameImage {
+  width: 250px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 8px;
+  display: block;
+  margin-top: 20px;
+}
+
+.gameText {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+}
+
+.gameTitle {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-weight: bold;
+  color: #f20065;
+  font-size: 32px;
+  margin-top: 20px;
+  text-align: center;
+}
+
+.gameInfo {
+  font-family: 'Playfair Display', serif;
+  font-size: 14px;
+  color: #fff;
+  padding: 5px 0;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.gameInfo .bold {
+  font-weight: bold; /* Aggiungi grassetto solo agli elementi specifici */
+}
+
+.gameDescription {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  width: 100%;
+  justify-content: space-between;
+}
+
+p {
+  font-family: 'Playfair Display', serif;
+  font-size: 16px;
+  text-align: justify;
+  max-width: 800px;
+  margin-top: 10px;
+  line-height: 1.8;
+}
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+  

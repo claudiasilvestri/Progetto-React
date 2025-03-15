@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import styles from "../Home/Home.module.css";
+import { useParams, useNavigate } from "react-router-dom"; 
+import styles from './Genre.module.css';
 import GameCard from "../../components/GameCard";
+import Sidebar from "../../components/Sidebar";
 
 export default function Genre() {
   const [games, setGames] = useState([]);
   const { id } = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchGenres = async () => {
@@ -19,20 +21,25 @@ export default function Genre() {
     fetchGenres();
   }, [id]);
 
+  const handleGoHome = () => {
+    navigate('/'); 
+  };
+
   return (
-    <div className={styles.main}>
-      <div className={styles.heading}>
-      </div>
-      <div className={styles.games}>
+    <div className={`${styles.main} ${styles.container}`}>
+      <Sidebar />
+      <div className={styles.games_wrapper}>
         {games.map((game) => (
           <div key={game.id} className={styles.gameCard}>
             <GameCard game={game} />
           </div>
         ))}
       </div>
+      <button onClick={handleGoHome} className={styles.homeButton}>Home</button>
     </div>
   );
 }
+
 
 
 

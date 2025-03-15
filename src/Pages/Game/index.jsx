@@ -1,5 +1,6 @@
-import { useParams } from "react-router";
 import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom"; 
+import styles from './game.module.css';
 
 export default function Game() {
     const { id } = useParams();
@@ -16,16 +17,18 @@ export default function Game() {
     }, [id]);
 
     return (
-        <div className="container">
+        <div className={styles.centeredContainer}>
             {game && (
-                <>
-                    <img src={game.background_image} alt="" />
-                    <h1>{game.name}</h1>
+                <div className={styles.gameCard}>
+                    <div className={styles.gameTitle}>{game.name}</div>
+                    <img src={game.background_image} alt={game.name} className={styles.gameImage} />
                     <p>{game.description_raw}</p>
-                    <p>{game.rating}</p>
-                    <p>{game.released}</p>
-                </>
+                    <p className={styles.bold}>Rating: {game.rating}</p>
+                    <p className={styles.bold}>Released: {game.released}</p>
+                </div>
             )}
         </div>
     );
 }
+
+
