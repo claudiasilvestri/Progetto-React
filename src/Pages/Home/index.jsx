@@ -2,8 +2,10 @@ import { useState, useEffect, useRef } from "react";
 import styles from "./Home.module.css";
 import GameCard from "../../components/GameCard";
 import Sidebar from "../../components/Sidebar";
+import Spinner from "../../components/Spinner";
 
-const BASE_URL = "https://api.rawg.io/api/games?key=c6d86a1b0cfc40fa8902c3705680c2ed&dates=2024-01-01,2024-12-31&page_size=20";
+const BASE_URL =
+  "https://api.rawg.io/api/games?key=c6d86a1b0cfc40fa8902c3705680c2ed&dates=2024-01-01,2024-12-31&page_size=20";
 
 export default function Home() {
   const [games, setGames] = useState([]);
@@ -19,14 +21,7 @@ export default function Home() {
       try {
         const response = await fetch(`${BASE_URL}&page=${page}`);
         const json = await response.json();
-
-        // Modifica l'URL dell'immagine per forzare una risoluzione uniforme (ad esempio 1920x1080)
-        const updatedGames = json.results.map(game => ({
-          ...game,
-          background_image: game.background_image.replace("https://media.rawg.io/media/screenshots/", "https://media.rawg.io/media/screenshots/1920x1080_")
-        }));
-
-        setGames((prev) => [...prev, ...updatedGames]);
+        setGames((prev) => [...prev, ...json.results]);
 
         const nextResponse = await fetch(`${BASE_URL}&page=${page + 1}`);
         const nextJson = await nextResponse.json();
@@ -63,15 +58,20 @@ export default function Home() {
   return (
     <div className={`${styles.main} ${styles.container}`}>
       <Sidebar />
-      <div className={styles.games_wrapper}>
-        {games.map((game) => (
-          <GameCard key={game.id} game={game} />
-        ))}
+  
+      <div className={styles.content}>
+        <h1 className={styles.title}>New and trending</h1> 
+        
+        <div className={styles.games_wrapper}>
+          {games.map((game) => (
+            <GameCard key={game.id} game={game} />
+          ))}
+        </div>
+  
+        <div ref={loadMoreRef} style={{ height: "20px" }} />
+  
+        {loading && page === 1 && <Spinner />}
       </div>
-      <div ref={loadMoreRef} style={{ height: "20px" }} />
-      {loading && page === 1 && <p className={styles.loading}>Loading...</p>}
     </div>
   );
 }
-
- 

@@ -84,7 +84,7 @@ html, body {
   .homeButton {
     position: fixed;  
     top: 65px; 
-    left: 20px;         
+    right: 20px;         
     background-color: #4CAF50;  
     color: white;               
     padding: 8px 15px;            

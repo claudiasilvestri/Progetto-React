@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import styles from './Platform.module.css';
 import GameCard from "../../components/GameCard";
 import Sidebar from "../../components/Sidebar";
+import Spinner from "../../components/Spinner"; 
 
 const BASE_URL = "https://api.rawg.io/api/games?key=c6d86a1b0cfc40fa8902c3705680c2ed";
 
@@ -70,12 +71,16 @@ export default function Platform() {
           </div>
         ))}
       </div>
+
       <div ref={loadMoreRef} style={{ height: "20px" }} />
-      {loading && page === 1 && <p className={styles.loading}>Loading...</p>}
+
+      {loading && page === 1 && <Spinner />}
+
       <button onClick={handleGoHome} className={styles.homeButton}>Home</button>
     </div>
   );
 }
+
 
 
 

@@ -11,6 +11,14 @@ html, body {
   box-sizing: border-box;
 }
 
+.title {
+  font-size: 2rem; 
+  font-weight: bold; 
+  text-align: center; 
+  color:  #f20065; 
+  margin-bottom: 20px; 
+}
+
 .games_wrapper {
   display: flex;
   flex-wrap: wrap;
@@ -60,21 +68,25 @@ margin-left: 10px;
 }
 
 .dropdown ul {
-list-style: none;
-padding: 0;
-margin: 0;
-max-height: 200px; 
-overflow-y: auto; 
-background: #ffffffb3; 
-padding: 10px;
-border-radius: 5px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-height: 200px;
+  overflow-y: auto;
+  background:rgba(255, 255, 255, 0.9);
+  padding: 10px;
+  border-radius: 5px;
 }
 
 .dropdown li {
-font-weight: bold;
-color: #171616; 
-padding: 10px 0;
-font-size: 18px;
+  font-weight: bold;
+  color: rgba(255, 255, 255, 0.7);
+  padding: 10px 0;
+  font-size: 18px;
+}
+
+.dropdown li:last-child {
+  border-bottom: none;
 }
 
 .dropdown li:last-child {

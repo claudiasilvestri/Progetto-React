@@ -4,20 +4,23 @@ import GameImage from "./GameImage";
 import "../Layout/GameCard.css";
 
 export default function GameCard({ game }) {
-  const navigate = useNavigate ();
+  const navigate = useNavigate();
   const [hidden, setHidden] = useState(true);
-  const genres = game.genres.map((genre) => genre.id).join(',');
+
+  const genres = game.genres.map((genre) => genre.name).join(", ");
 
   return (
     <article
-className="game_card"
-onMouseEnter={() => setHidden(false)}
-onMouseLeave={() => setHidden(true)}
-onClick={() => navigate(`/games/${game.id}/${game.name}`)}
+      className="game_card"
+      onMouseEnter={() => setHidden(false)}
+      onMouseLeave={() => setHidden(true)}
+      onClick={() => navigate(`/games/${game.id}/${game.name}`)}
     >
-      
+      <div className="game_genres">{genres}</div>
+
       <GameImage image={game.background_image} />
       <h4 className="game_title">{game.name}</h4>
+
       {hidden ? (
         <small className="read_more">Read more...</small>
       ) : (
@@ -35,4 +38,14 @@ onClick={() => navigate(`/games/${game.id}/${game.name}`)}
       )}
     </article>
   );
-} 
+}
+
+
+
+
+
+
+
+
+
+
