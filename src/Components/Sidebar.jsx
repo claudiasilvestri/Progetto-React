@@ -31,7 +31,7 @@ export default function Sidebar() {
   return (
     <div className={styles.sidebar}>
       <details className={styles.dropdown}>
-        <summary>Genres</summary>
+        <summary className={styles.summary}>Genres</summary>
         <ul>
           {genres.map((genre) => (
             <li key={genre.name}>
@@ -42,7 +42,7 @@ export default function Sidebar() {
       </details>
 
       <details className={styles.dropdown}>
-        <summary>Platforms</summary>
+        <summary className={styles.summary}>Platforms</summary>
         <ul>
           {platforms.map((platform) => (
             <li key={platform.id}>
@@ -54,3 +54,4 @@ export default function Sidebar() {
     </div>
   );
 }
+

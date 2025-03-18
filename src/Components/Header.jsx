@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, Outlet } from 'react-router-dom';
 import '../Layout/Header.css'; 
+import SearchBar from "./SearchBar";
 
 const Navbar = () => {
   return (
@@ -9,12 +10,9 @@ const Navbar = () => {
         <div className="navbar-left">
           <Link to="/" className="navbar-brand">GameVerse</Link>
         </div>
-
-        <div className="navbar-center">
-          <input type="text" className="search-bar" placeholder="Search..." />
-          <button className="search-btn">Search</button>
-        </div>
-
+        
+        <SearchBar />
+        
         <div className="navbar-right">
           <Link to="/login" className="auth-btn">Login</Link>
           <Link to="/register" className="auth-btn">Register</Link>
@@ -27,6 +25,7 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
 
 
 

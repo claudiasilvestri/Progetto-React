@@ -46,51 +46,58 @@ width: 250px;
 border-radius: 10px;
 }
 
+/* Stile base del dropdown */
 .dropdown {
-margin-top: 10px;
-margin-bottom: 40px
+  position: relative;
+  display: inline-block;
 }
 
-.dropdown summary {
-font-weight: bold;
-color:#4CAF50; 
-font-size: 24px; 
-cursor: pointer;
-display: flex;
-align-items: center;
-margin-bottom: 20px; 
-}
-
-.dropdown summary::after {
-content: " ▼"; 
-font-size: 18px; 
-margin-left: 10px;
-}
-
-.dropdown ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  max-height: 200px;
-  overflow-y: auto;
-  background:rgba(255, 255, 255, 0.9);
-  padding: 10px;
-  border-radius: 5px;
-}
-
-.dropdown li {
-  font-weight: bold;
-  color: rgba(255, 255, 255, 0.7);
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #222;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  border-radius: 8px;
   padding: 10px 0;
-  font-size: 18px;
+  transition: opacity 0.3s ease-in-out;
 }
 
-.dropdown li:last-child {
-  border-bottom: none;
+.dropdown-content a {
+  color: white;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
 }
 
-.dropdown li:last-child {
-border-bottom: none;
-} 
+.dropdown-content a:hover {
+  background-color: #444;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+  opacity: 1;
+}
+
+/* Stile per il bottone del dropdown */
+.dropdown-button {
+  background-color: #f20065;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.dropdown-button:hover {
+  background-color: #e10059;
+}
+
 
 

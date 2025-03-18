@@ -11,37 +11,35 @@ export default function Home() {
   const [games, setGames] = useState([]);
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
-  const [nextPageData, setNextPageData] = useState(null);
   const observerRef = useRef(null);
   const loadMoreRef = useRef(null);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
-      try {
-        const response = await fetch(`${BASE_URL}&page=${page}`);
-        const json = await response.json();
+  const fetchData = async (pageNum) => {
+    setLoading(true);
+    try {
+      const response = await fetch(`${BASE_URL}&page=${pageNum}`);
+      const json = await response.json();
+      
+      if (pageNum === 1) {
+        setGames(json.results);
+      } else {
         setGames((prev) => [...prev, ...json.results]);
-
-        const nextResponse = await fetch(`${BASE_URL}&page=${page + 1}`);
-        const nextJson = await nextResponse.json();
-        setNextPageData(nextJson.results);
-      } catch (error) {
-        console.error("Errore nel caricamento:", error);
-      } finally {
-        setLoading(false);
       }
-    };
+    } catch (error) {
+      console.error("Errore nel caricamento:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
-    fetchData();
+  useEffect(() => {
+    fetchData(page);
   }, [page]);
 
   useEffect(() => {
     observerRef.current = new IntersectionObserver(
       (entries) => {
-        if (entries[0].isIntersecting && nextPageData) {
-          setGames((prev) => [...prev, ...nextPageData]);
-          setNextPageData(null);
+        if (entries[0].isIntersecting) {
           setPage((prevPage) => prevPage + 1);
         }
       },
@@ -52,25 +50,29 @@ export default function Home() {
       observerRef.current.observe(loadMoreRef.current);
     }
 
-    return () => observerRef.current.disconnect();
-  }, [nextPageData]);
+    return () => {
+      if (observerRef.current) {
+        observerRef.current.disconnect();
+      }
+    };
+  }, []);
 
   return (
     <div className={`${styles.main} ${styles.container}`}>
       <Sidebar />
-  
+
       <div className={styles.content}>
-        <h1 className={styles.title}>New and trending</h1> 
-        
+        <h1 className={styles.title}>New and trending</h1>
+
         <div className={styles.games_wrapper}>
           {games.map((game) => (
             <GameCard key={game.id} game={game} />
           ))}
         </div>
-  
+
         <div ref={loadMoreRef} style={{ height: "20px" }} />
-  
-        {loading && page === 1 && <Spinner />}
+
+        {loading && <Spinner />}
       </div>
     </div>
   );

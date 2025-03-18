@@ -23,29 +23,6 @@
   margin: 0 20px;
 }
 
-.search-bar {
-  padding: 5px;
-  font-size: 14px;
-  border: 2px solid #ddd;
-  border-radius: 4px;
-  width: 240px;
-}
-
-.search-btn {
-  padding: 5px 12px;
-  background-color: #4CAF50; 
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  margin-left: 4px;
-  font-weight: bold; 
-}
-
-.search-btn:hover {
-  background-color: #45a049; 
-}
-
 .navbar-right {
   display: flex;
 }
