@@ -1,6 +1,8 @@
+
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom"; 
 import styles from "../Pages/Home/Home.module.css";
+import '../Layout/Header.css';
 
 export default function Sidebar() {
   const [genres, setGenres] = useState([]);
@@ -29,29 +31,35 @@ export default function Sidebar() {
   }, []);
   
   return (
-    <div className={styles.sidebar}>
-      <details className={styles.dropdown}>
-        <summary className={styles.summary}>Genres</summary>
-        <ul>
-          {genres.map((genre) => (
-            <li key={genre.name}>
-              <Link to={`/games/genre/${genre.id}`}>{genre.name}</Link>
-            </li>
-          ))}
-        </ul>
-      </details>
+    <div className="sidebar">
+      <div className={styles.detailsWrapper}>
+        <details className={styles.dropdown}>
+          <summary className={styles.summary}>Genres</summary>
+          <ul>
+            {genres.map((genre) => (
+              <li key={genre.name}>
+                <Link to={`/games/genre/${genre.id}`}>{genre.name}</Link>
+              </li>
+            ))}
+          </ul>
+        </details>
 
-      <details className={styles.dropdown}>
-        <summary className={styles.summary}>Platforms</summary>
-        <ul>
-          {platforms.map((platform) => (
-            <li key={platform.id}>
-              <Link to={`/games/platform/${platform.id}`}>{platform.name}</Link>
-            </li>
-          ))}
-        </ul>
-      </details>
+        <details className={styles.dropdown}>
+          <summary className={styles.summary}>Platforms</summary>
+          <ul>
+            {platforms.map((platform) => (
+              <li key={platform.id}>
+                <Link to={`/games/platform/${platform.id}`}>{platform.name}</Link>
+              </li>
+            ))}
+          </ul>
+        </details>
+      </div>
     </div>
   );
 }
+
+
+
+
 

@@ -1,10 +1,10 @@
 html, body {
-  height: 100%; 
+  height: 100%;
   margin: 0;
-  overflow-x: hidden; 
+  overflow-x: hidden;
 }
 
-  .container {
+.container {
   min-height: 100vh;
   overflow-y: auto;
   padding: 20px;
@@ -12,11 +12,11 @@ html, body {
 }
 
 .title {
-  font-size: 2rem; 
-  font-weight: bold; 
-  text-align: center; 
-  color:  #f20065; 
-  margin-bottom: 20px; 
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+  color: #f20065;
+  margin-bottom: 20px;
 }
 
 .games_wrapper {
@@ -28,25 +28,20 @@ html, body {
 
 .main {
   width: 100%;
-  display:flex;
+  display: flex;
 }
 
 .sidebar {
-  width: 30%;
+  background: #ffffffb3;
+  padding: 20px;
+  width: 250px;
+  border-radius: 10px;
 }
 
 .games {
-width: 70%;
+  width: 70%;
 }
 
-.sidebar {
-background: #ffffffb3; 
-padding: 20px;
-width: 250px;
-border-radius: 10px;
-}
-
-/* Stile base del dropdown */
 .dropdown {
   position: relative;
   display: inline-block;
@@ -83,7 +78,6 @@ border-radius: 10px;
   opacity: 1;
 }
 
-/* Stile per il bottone del dropdown */
 .dropdown-button {
   background-color: #f20065;
   color: white;

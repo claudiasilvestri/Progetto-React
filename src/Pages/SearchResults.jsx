@@ -26,7 +26,7 @@ const SearchResults = () => {
 
   return (
     <div className="search-results-container">
-      <h2>Risultati per: {query}</h2>
+      <h1>Results for: {query}</h1>
       {loading ? (
         <p>Caricamento...</p>
       ) : (
