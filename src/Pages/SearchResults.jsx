@@ -26,7 +26,6 @@ const SearchResults = () => {
 
   return (
     <div className="search-results-container">
-      <h1>Results for: {query}</h1>
       {loading ? (
         <p>Caricamento...</p>
       ) : (
@@ -61,6 +60,7 @@ const SearchResults = () => {
 };
 
 export default SearchResults;
+
 
 
 

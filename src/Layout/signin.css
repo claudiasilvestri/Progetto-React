@@ -1,4 +1,4 @@
-.signup-container {
+.signin-container {
   background-color: #222;
   color: #f20065;
   width: 100%;
@@ -15,7 +15,7 @@ h2 {
   font-size: 20px;
 }
 
-.signup-form {
+.signin-form {
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -44,7 +44,7 @@ input:focus {
   outline: none;
 }
 
-.signup-button {
+.signin-button {
   background-color: #4CAF50;
   color: white;
   padding: 6px 12px;
@@ -58,20 +58,20 @@ input:focus {
   margin: 0 auto;
 }
 
-.signup-button:hover {
+.signin-button:hover {
   background-color: #45a049;
   transform: translateY(-1px);
 }
 
-.signup-button:active {
+.signin-button:active {
   transform: translateY(1px);
 }
-
 
 .remember-me-container {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
+  width: 100%;
 }
 
 .remember-me-label {
@@ -84,9 +84,8 @@ input:focus {
 .switch {
   position: relative;
   display: inline-block;
-  width: 30px;
-  height: 16px;
-  margin-left: 10px;
+  width: 34px;
+  height: 20px;
 }
 
 .switch input {
@@ -113,8 +112,8 @@ input:focus {
   height: 12px;
   width: 12px;
   border-radius: 50%;
-  left: 2px;
-  bottom: 2px;
+  left: 4px;
+  bottom: 4px;
   background-color: white;
   transition: .4s;
 }
@@ -124,27 +123,31 @@ input:checked + .slider {
 }
 
 input:checked + .slider:before {
-  transform: translateX(16px);
-  background-color: white;
+  transform: translateX(14px);
 }
 
-.already-registered {
+.signin-container p {
   text-align: center;
-  margin-top: 20px;
+  font-size: 14px;
+  color: #f20065;
 }
 
-.already-registered p {
-  font-weight: bold;
-  font-size: 12px;
-}
-
-.already-registered a {
+.signin-container p a {
   color: #f20065;
   font-weight: bold;
   text-decoration: none;
-  font-size: 12px;
 }
 
-.already-registered a:hover {
+.signin-container p a:hover {
   text-decoration: underline;
 }
+
+
+
+
+
+
+
+
+
+

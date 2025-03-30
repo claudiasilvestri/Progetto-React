@@ -9,10 +9,13 @@ const SignUp = () => {
     username: "",
     email: "",
     password: "",
+    first_name: "",
+    last_name: "",
     rememberMe: false,
   });
-
-  const navigate = useNavigate(); 
+  
+  const [userData, setUserData] = useState(null);
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -24,26 +27,36 @@ const SignUp = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const { email, password } = formData;
-    
+    const { email, password, first_name, last_name, username } = formData;
+
     let { data, error } = await supabase.auth.signUp({
       email,
       password,
+      options: {
+        data: {
+          username: formData.username,
+          first_name: formData.first_name,
+          last_name: formData.last_name,
+        },
+      },
     });
 
     if (error) {
-      toast.error('Error');
+      toast.error('Registration error: ' + error.message);
     } else {
+      const user = supabase.auth.user();
+      setUserData(user);
+      toast.success('Registration successful! You can now log in.');
       setFormData({
         username: "",
         email: "",
         password: "",
+        first_name: "",
+        last_name: "",
         rememberMe: false,
       });
-
-      toast.success('Registration successful! You can now log in.');
       await new Promise((resolve) => setTimeout(resolve, 1000));
-      navigate("/");
+      navigate("/dashboard");
     }
   };
 
@@ -51,6 +64,30 @@ const SignUp = () => {
     <div className="signup-container">
       <h2>Sign Up</h2>
       <form onSubmit={handleSubmit} className="signup-form">
+        <div className="form-group">
+          <label htmlFor="first_name">First Name</label>
+          <input
+            type="text"
+            id="first_name"
+            name="first_name"
+            value={formData.first_name}
+            onChange={handleChange}
+            required
+          />
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="last_name">Last Name</label>
+          <input
+            type="text"
+            id="last_name"
+            name="last_name"
+            value={formData.last_name}
+            onChange={handleChange}
+            required
+          />
+        </div>
+
         <div className="form-group">
           <label htmlFor="username">Username</label>
           <input
@@ -111,11 +148,23 @@ const SignUp = () => {
       <div className="already-registered">
         <p> Already registered? <Link to="/login">Log in</Link></p>
       </div>
+
+      {userData && (
+        <div className="user-info">
+          <h3>User Information</h3>
+          <p><strong>First Name:</strong> {userData.user_metadata.first_name}</p>
+          <p><strong>Last Name:</strong> {userData.user_metadata.last_name}</p>
+          <p><strong>Username:</strong> {userData.user_metadata.username}</p>
+          <p><strong>Email:</strong> {userData.email}</p>
+        </div>
+      )}
     </div>
   );
 };
 
 export default SignUp;
+
+
 
 
 
