@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import styles from "./Home.module.css";
 import GameCard from "../../components/GameCard";
-import Sidebar from "../../components/Sidebar";
 import Spinner from "../../components/Spinner";
 
 const BASE_URL =
@@ -59,8 +58,7 @@ export default function Home() {
 
   return (
     <div className={`${styles.main} ${styles.container}`}>
-      <Sidebar />
-
+     
       <div className={styles.content}>
         <h1 className={styles.title}>New and trending</h1>
 

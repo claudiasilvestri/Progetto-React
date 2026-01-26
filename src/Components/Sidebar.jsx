@@ -1,65 +1,55 @@
-
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom"; 
-import styles from "../Pages/Home/Home.module.css";
-import '../Layout/Header.css';
+import { Link } from "react-router-dom";
+import "../Layout/Sidebar.css";
 
 export default function Sidebar() {
   const [genres, setGenres] = useState([]);
   const [platforms, setPlatforms] = useState([]);
+  const [open, setOpen] = useState(null);
 
   useEffect(() => {
-    const fetchGenresAndPlatforms = async () => {
-      try {
-        const genresResponse = await fetch(
-          "https://api.rawg.io/api/genres?key=c6d86a1b0cfc40fa8902c3705680c2ed&dates=2024-01-01,2024-12-31"
-        );
-        const genresjson = await genresResponse.json();
-        setGenres(genresjson.results);
-  
-        const platformsResponse = await fetch(
-          "https://api.rawg.io/api/platforms?key=c6d86a1b0cfc40fa8902c3705680c2ed&dates=2024-01-01,2024-12-31"
-        );
-        const platformsJson = await platformsResponse.json();
-        setPlatforms(platformsJson.results);
-      } catch (error) {
-        console.error("Error fetching genres and platforms:", error);
-      }
+    const fetchData = async () => {
+      const g = await fetch("https://api.rawg.io/api/genres?key=c6d86a1b0cfc40fa8902c3705680c2ed");
+      const p = await fetch("https://api.rawg.io/api/platforms?key=c6d86a1b0cfc40fa8902c3705680c2ed");
+      setGenres((await g.json()).results);
+      setPlatforms((await p.json()).results);
     };
-
-    fetchGenresAndPlatforms();
+    fetchData();
   }, []);
-  
-  return (
-    <div className="sidebar">
-      <div className={styles.detailsWrapper}>
-        <details className={styles.dropdown}>
-          <summary className={styles.summary}>Genres</summary>
-          <ul>
-            {genres.map((genre) => (
-              <li key={genre.name}>
-                <Link to={`/games/genre/${genre.id}`}>{genre.name}</Link>
-              </li>
-            ))}
-          </ul>
-        </details>
 
-        <details className={styles.dropdown}>
-          <summary className={styles.summary}>Platforms</summary>
-          <ul>
-            {platforms.map((platform) => (
-              <li key={platform.id}>
-                <Link to={`/games/platform/${platform.id}`}>{platform.name}</Link>
-              </li>
-            ))}
-          </ul>
-        </details>
+  return (
+    <aside className="sidebar">
+      <div className="details-wrapper">
+        <div className="section">
+          <div className="summary" onClick={() => setOpen(open === "genres" ? null : "genres")}>
+            Genres
+          </div>
+          {open === "genres" && (
+            <ul>
+              {genres.map(g => (
+                <li key={g.id}>
+                  <Link to={`/games/genre/${g.id}`}>{g.name}</Link>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+
+        <div className="section">
+          <div className="summary" onClick={() => setOpen(open === "platforms" ? null : "platforms")}>
+            Platforms
+          </div>
+          {open === "platforms" && (
+            <ul>
+              {platforms.map(p => (
+                <li key={p.id}>
+                  <Link to={`/games/platform/${p.id}`}>{p.name}</Link>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
       </div>
-    </div>
+    </aside>
   );
 }
-
-
-
-
-

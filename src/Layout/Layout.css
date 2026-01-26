@@ -1,0 +1,15 @@
+.main {
+  display: flex;
+  width: 100%;
+}
+
+.sidebar {
+  width: 250px;
+  flex-shrink: 0;
+}
+
+.games {
+  flex: 1;
+  padding:20px;
+}
+

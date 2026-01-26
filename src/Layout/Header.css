@@ -44,36 +44,37 @@
   background-color: #45a049;
 }
 
+.main {
+  display: flex;
+  width: 100%;
+}
+
 .sidebar {
   width: 200px;
   height: calc(100vh - 60px);
-  color: #4CAF50;
   padding: 15px;
-  position: fixed;
-  left: 0;
-  top: 60px;
   display: flex;
   flex-direction: column;
-  z-index: 10;
   font-size: 16px;
+  color: #4CAF50;
   background-color: transparent;
-  overflow-y: auto;
+  position: static;
+  flex-shrink: 0;
 }
 
 .sidebar .details-wrapper {
   flex-grow: 1;
-  max-height: calc(100vh - 60px);
   overflow-y: auto;
 }
 
 .sidebar .dropdown {
   width: 100%;
-  margin-bottom: 20px; 
+  margin-bottom: 20px;
 }
 
 .sidebar .summary {
   cursor: pointer;
-  color: #f20065; 
+  color: #f20065;
   background-color: #34495e;
   padding: 12px;
   border-radius: 5px;
@@ -93,7 +94,7 @@
 
 .sidebar li {
   margin: 15px 0;
-  font-size: 12px; 
+  font-size: 12px;
 }
 
 .sidebar a {
@@ -106,8 +107,8 @@
   color: #fff;
 }
 
-.content {
-  margin-left: 220px;
+.games {
+  flex: 1;
   padding: 20px;
 }
 
@@ -145,5 +146,3 @@
 .search-btn:hover {
   background-color: #45a049;
 }
-
-

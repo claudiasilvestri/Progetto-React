@@ -1,52 +1,81 @@
-import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider, Navigate, Outlet } from "react-router-dom";
+import {
+  createBrowserRouter,
+  createRoutesFromElements,
+  Route,
+  Navigate,
+  Outlet,
+} from "react-router-dom";
 import { useContext } from "react";
-import { SessionContext, SessionContextProvider } from "../Context/SessionContext";
-import useSession from "../Hooks/useSession";  
+import { SessionContext } from "../Context/SessionContext";
+
 import Navbar from "../Components/Header";
-import Home from "../pages/Home";
-import Genre from "../pages/Genre";
-import Game from "../pages/Game";
-import Platform from "../pages/Platform";
-import SearchResults from "../pages/SearchResults";
+import Sidebar from "../Components/Sidebar";
+
+import Home from "../Pages/Home";
+import Genre from "../Pages/Genre";
+import Game from "../Pages/Game";
+import Platform from "../Pages/Platform";
+import SearchResults from "../Pages/SearchResults";
 import SignUp from "../Pages/SignUp";
 import SignIn from "../Pages/SignIn";
 import Account from "../Pages/Account";
 
-export function ProtectedRoute() {
-  const { user } = useContext(SessionContext);  
+import "../Layout/Layout.css";
+
+function LayoutHome() {
+  return (
+    <div className="container">
+      <Navbar />
+      <div className="main">
+        <Sidebar />
+        <div className="games">
+          <Outlet />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function LayoutBase() {
+  return (
+    <div className="container">
+      <Navbar />
+      <Outlet />
+    </div>
+  );
+}
+
+function ProtectedRoute() {
+  const { user } = useContext(SessionContext);
 
   if (!user) {
-    return <Navigate to="/login" />;  
+    return <Navigate to="/login" />;
   }
 
-  return <Outlet />;  
+  return <Outlet />;
 }
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route element={<Navbar />}>
-      <Route path="/" element={<Home />} />
-      <Route path="games/genre/:id" element={<Genre />} />
-      <Route path="games/:id/:game" element={<Game />} />
-      <Route path="games/platform/:platformID" element={<Platform />} />
-      <Route path="search/:query" element={<SearchResults />} />
-      <Route element={<ProtectedRoute />}>
-        <Route path="/account" element={<Account />} />
+    <>
+      <Route element={<LayoutHome />}>
+        <Route path="/" element={<Home />} />
       </Route>
-      <Route path="/register" element={<SignUp />} />
-      <Route path="/login" element={<SignIn />} />
-    </Route>
+
+      <Route element={<LayoutBase />}>
+        <Route path="games/genre/:id" element={<Genre />} />
+        <Route path="games/:id/:game" element={<Game />} />
+        <Route path="games/platform/:platformID" element={<Platform />} />
+        <Route path="search/:query" element={<SearchResults />} />
+        <Route path="login" element={<SignIn />} />
+        <Route path="register" element={<SignUp />} />
+
+        <Route element={<ProtectedRoute />}>
+          <Route path="account" element={<Account />} />
+        </Route>
+      </Route>
+    </>
   )
 );
 
-export function App() {
-  return (
-    <SessionContextProvider>
-      <RouterProvider router={router} />
-    </SessionContextProvider>
-  );
-}
-
 export default router;
-
-
