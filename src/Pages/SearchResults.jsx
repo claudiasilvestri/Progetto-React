@@ -1,28 +1,36 @@
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import "../Layout/SearchResults.css"; 
+import "../Layout/SearchResults.css";
+import ImageSafe from "../components/ImageSafe";
 
-const SearchResults = () => {
+export default function SearchResults() {
   const { query } = useParams();
+  const navigate = useNavigate();
+
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(true);
-  const navigate = useNavigate(); 
 
   useEffect(() => {
+    setResults([]);
+    setLoading(true);
+
     const fetchResults = async () => {
-      setLoading(true);
-      const response = await fetch(`https://api.rawg.io/api/games?key=c6d86a1b0cfc40fa8902c3705680c2ed&search=${query}`);
-      const data = await response.json();
-      setResults(data.results);
-      setLoading(false);
+      try {
+        const response = await fetch(
+          `https://api.rawg.io/api/games?key=c6d86a1b0cfc40fa8902c3705680c2ed&search=${query}`
+        );
+
+        const data = await response.json();
+        setResults(data.results || []);
+      } catch (error) {
+        console.error("Errore ricerca:", error);
+      } finally {
+        setLoading(false);
+      }
     };
 
     fetchResults();
   }, [query]);
-
-  const handleGoHome = () => {
-    navigate("/"); 
-  };
 
   return (
     <div className="search-results-container">
@@ -35,17 +43,29 @@ const SearchResults = () => {
           ) : (
             results.map((game) => (
               <div key={game.id} className="game_card">
-                <Link to={`/games/${game.id}/${game.name}`} className="game-link">
-                  <img
-                    src={game.background_image || 'https://via.placeholder.com/200'}
+                <Link
+                  to={`/games/${game.id}/${game.name}`}
+                  className="game-link"
+                >
+                  <ImageSafe
+                    src={game.background_image}
                     alt={game.name}
-                    className="game-image"
                   />
+
                   <h3 className="game_title">{game.name}</h3>
-                  <div className="game_genres">{game.genres?.map(genre => genre.name).join(", ")}</div>
+
+                  <div className="game_genres">
+                    {game.genres?.map((g) => g.name).join(", ")}
+                  </div>
+
                   <div className="game_info">
                     <p>Anno: {game.released}</p>
-                    <p>Piattaforme: {game.platforms?.map(platform => platform.platform.name).join(", ")}</p>
+                    <p>
+                      Piattaforme:{" "}
+                      {game.platforms
+                        ?.map((p) => p.platform.name)
+                        .join(", ")}
+                    </p>
                   </div>
                 </Link>
               </div>
@@ -54,14 +74,9 @@ const SearchResults = () => {
         </div>
       )}
 
-      <button onClick={handleGoHome} className="homeButton">Home</button>
+      <button onClick={() => navigate("/")} className="homeButton">
+        Home
+      </button>
     </div>
   );
-};
-
-export default SearchResults;
-
-
-
-
-
+}
