@@ -2,33 +2,32 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../Layout/SearchBar.css";
 
-const SearchBar = () => {
+export default function SearchBar() {
   const [query, setQuery] = useState("");
   const navigate = useNavigate();
 
-  const handleSearch = () => {
-    if (query.trim()) {
-      navigate(`/search/${query.trim()}`);
-      setQuery("");
-    }
-  };
+  function handleSubmit(e) {
+    e.preventDefault();
+
+    if (!query.trim()) return;
+
+    navigate(`/search/${query.trim()}`);
+    setQuery("");
+  }
 
   return (
-    <div className="search-bar-container">
+    <form className="search-bar-container" onSubmit={handleSubmit}>
       <input
         type="text"
         className="search-bar"
         value={query}
         onChange={(e) => setQuery(e.target.value)}
-        onKeyDown={(e) => e.key === "Enter" && handleSearch()}
         placeholder="Search for a game..."
       />
 
-      <button onClick={handleSearch} className="search-btn">
+      <button type="submit" className="search-btn">
         Search
       </button>
-    </div>
+    </form>
   );
-};
-
-export default SearchBar;
+}

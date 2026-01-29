@@ -1,7 +1,7 @@
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import "../Layout/SearchResults.css";
-import ImageSafe from "../components/ImageSafe";
+import GameImage from "../components/GameImage";
 
 export default function SearchResults() {
   const { query } = useParams();
@@ -47,10 +47,7 @@ export default function SearchResults() {
                   to={`/games/${game.id}/${game.name}`}
                   className="game-link"
                 >
-                  <ImageSafe
-                    src={game.background_image}
-                    alt={game.name}
-                  />
+                  <GameImage image={game.background_image} />
 
                   <h3 className="game_title">{game.name}</h3>
 
