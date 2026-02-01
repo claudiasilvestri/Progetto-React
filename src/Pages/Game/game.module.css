@@ -1,11 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap");
 
 .centeredContainer {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  height: 100vh;
+  min-height: 100vh;
   background-color: rgba(255, 255, 255, 0.8);
   padding: 20px;
   margin-top: 50px;
@@ -16,66 +16,26 @@
   padding: 20px;
   border-radius: 10px;
   width: 100%;
-  max-width: 800px;
+  max-width: 850px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.gameImage {
-  width: 250px;
-  height: 150px;
-  object-fit: cover;
-  border-radius: 8px;
-  display: block;
-  margin-top: 20px;
-}
-
-.gameText {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  width: 100%;
-}
-
 .gameTitle {
-  font-family: 'Playfair Display', serif;
+  font-family: "Playfair Display", serif;
   font-style: italic;
   font-weight: bold;
   color: #f20065;
-  font-size: 32px;
+  font-size: 34px;
   margin-top: 20px;
   text-align: center;
-  margin-bottom: 10px;
-}
-
-.gameInfo {
-  font-family: 'Playfair Display', serif;
-  font-size: 14px;
-  color: #fff;
-  padding: 5px 0;
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  margin-bottom: 10px;
-}
-
-.gameInfo .bold {
-  font-weight: bold;
-}
-
-.gameDescription {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  width: 100%;
-  justify-content: space-between;
+  margin-bottom: 15px;
 }
 
 p {
-  font-family: 'Playfair Display', serif;
+  font-family: "Playfair Display", serif;
   font-size: 16px;
   text-align: justify;
   max-width: 800px;
@@ -83,50 +43,85 @@ p {
   line-height: 1.8;
 }
 
+.gameCover {
+  width: 600px !important;
+  height: 340px !important;
+  object-fit: cover;
+  border-radius: 16px;
+  margin-top: 20px;
+  display: block !important;
+}
+
+.gameCover span {
+  width: 600px !important;
+  height: 340px !important;
+  display: block !important;
+}
+
 .carousel {
-  width: 70%;
-  margin: 20px auto;
-  overflow: hidden;
+  width: 85%;
+  max-width: 520px;
+  height: 230px;
+  margin: 25px auto;
+  border-radius: 14px;
   position: relative;
-  background: 0 4px 6px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
+  overflow: hidden;
 }
 
 .carouselContainer {
   display: flex;
-  transition: transform 0.5s ease-in-out;
+  transition: transform 0.6s ease-in-out;
 }
 
 .carouselImageWrapper {
   min-width: 100%;
-  display: flex;
-  justify-content: center;
+  height: 230px;
 }
 
-.carouselImage {
-  width: 100%;
-  height: auto;
-  border-radius: 8px;
+.carouselImageWrapper span {
+  width: 100% !important;
+  height: 100% !important;
+  display: block !important;
+}
+
+.carouselImageWrapper img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 14px;
 }
 
 .scrollButton {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background: rgba(0, 0, 0, 0.5);
-  color: #fff;
+  width: 44px;
+  height: 44px;
+  background: rgba(255, 255, 255, 0.75);
+  color: black;
   border: none;
-  font-size: 2rem;
+  font-size: 1.9rem;
   cursor: pointer;
-  z-index: 10;
+  z-index: 100;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(6px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+  transition: transform 0.2s ease, background 0.3s ease;
 }
 
-.scrollButton:nth-child(1) {
-  left: 10px;
+.scrollButton:hover {
+  background: rgba(255, 255, 255, 0.95);
+  transform: translateY(-50%) scale(1.1);
 }
 
-.scrollButton:nth-child(3) {
-  right: 10px;
+.leftButton {
+  left: 12px;
 }
 
-
+.rightButton {
+  right: 12px;
+}

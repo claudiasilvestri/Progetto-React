@@ -19,7 +19,10 @@ function Carousel({ images }) {
 
   return (
     <div className={styles.carousel}>
-      <button onClick={handleScrollLeft} className={styles.scrollButton}>
+      <button
+        onClick={handleScrollLeft}
+        className={`${styles.scrollButton} ${styles.leftButton}`}
+      >
         ‹
       </button>
 
@@ -29,12 +32,15 @@ function Carousel({ images }) {
       >
         {images.map((image, index) => (
           <div key={index} className={styles.carouselImageWrapper}>
-            <GameImage image={image} />
+            <GameImage image={image} className={styles.carouselShot} />
           </div>
         ))}
       </div>
 
-      <button onClick={handleScrollRight} className={styles.scrollButton}>
+      <button
+        onClick={handleScrollRight}
+        className={`${styles.scrollButton} ${styles.rightButton}`}
+      >
         ›
       </button>
     </div>
@@ -84,10 +90,13 @@ export default function Game() {
 
           <h2 className={styles.gameTitle}>{game.name}</h2>
 
-          <GameImage image={game.background_image} />
+          <GameImage
+            image={game.background_image}
+            className={styles.gameCover}
+          />
 
           {screenshots.length > 0 && (
-            <Carousel images={screenshots.map((s) => s.image)} />
+            <Carousel images={screenshots.map((s) => s.image).filter(Boolean)} />
           )}
 
           <p>{game.description_raw}</p>
