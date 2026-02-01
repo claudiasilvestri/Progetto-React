@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import styles from "./game.module.css";
 import GameImage from "../../components/GameImage";
-import NoCover from "../../Assets/No-Cover.jpg";
+import BackButton from "../../components/BackButton";
 
 const API_KEY = "c6d86a1b0cfc40fa8902c3705680c2ed";
 
@@ -29,14 +29,7 @@ function Carousel({ images }) {
       >
         {images.map((image, index) => (
           <div key={index} className={styles.carouselImageWrapper}>
-            <img
-              src={image}
-              alt="Screenshot"
-              className={styles.carouselImage}
-              onError={(e) => {
-                e.currentTarget.src = NoCover;
-              }}
-            />
+            <GameImage image={image} />
           </div>
         ))}
       </div>
@@ -50,6 +43,7 @@ function Carousel({ images }) {
 
 export default function Game() {
   const { id } = useParams();
+
   const [game, setGame] = useState(null);
   const [screenshots, setScreenshots] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -78,23 +72,26 @@ export default function Game() {
     fetchData();
   }, [id]);
 
-  if (loading) return <div className={styles.loading}>Caricamento...</div>;
+  if (loading) {
+    return <div className={styles.loading}>Caricamento...</div>;
+  }
 
   return (
     <div className={styles.centeredContainer}>
       {game && (
         <div className={styles.gameCard}>
-          <div className={styles.gameTitle}>{game.name}</div>
+          <BackButton />
+
+          <h2 className={styles.gameTitle}>{game.name}</h2>
 
           <GameImage image={game.background_image} />
 
           {screenshots.length > 0 && (
-            <Carousel
-              images={screenshots.map((screenshot) => screenshot.image)}
-            />
+            <Carousel images={screenshots.map((s) => s.image)} />
           )}
 
           <p>{game.description_raw}</p>
+
           <p className={styles.bold}>Rating: {game.rating}</p>
           <p className={styles.bold}>Released: {game.released}</p>
         </div>
@@ -102,4 +99,3 @@ export default function Game() {
     </div>
   );
 }
-

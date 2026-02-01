@@ -1,15 +1,15 @@
 import { useEffect, useState, useRef } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import styles from "./Platform.module.css";
 import GameCard from "../../components/GameCard";
 import Spinner from "../../components/Spinner";
+import BackButton from "../../components/BackButton";
 
 const BASE_URL =
   "https://api.rawg.io/api/games?key=c6d86a1b0cfc40fa8902c3705680c2ed";
 
 export default function Platform() {
   const { platformID } = useParams();
-  const navigate = useNavigate();
 
   const [games, setGames] = useState([]);
   const [page, setPage] = useState(1);
@@ -93,9 +93,7 @@ export default function Platform() {
 
       {loading && page === 1 && <Spinner />}
 
-      <button onClick={() => navigate("/")} className={styles.homeButton}>
-        Home
-      </button>
+      <BackButton />
     </div>
   );
 }

@@ -1,11 +1,12 @@
-import { useParams, Link, useNavigate } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import "../Layout/SearchResults.css";
 import GameImage from "../components/GameImage";
 
+import BackButton from "../components/BackButton";
+
 export default function SearchResults() {
   const { query } = useParams();
-  const navigate = useNavigate();
 
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -59,9 +60,7 @@ export default function SearchResults() {
                     <p>Anno: {game.released}</p>
                     <p>
                       Piattaforme:{" "}
-                      {game.platforms
-                        ?.map((p) => p.platform.name)
-                        .join(", ")}
+                      {game.platforms?.map((p) => p.platform.name).join(", ")}
                     </p>
                   </div>
                 </Link>
@@ -70,10 +69,7 @@ export default function SearchResults() {
           )}
         </div>
       )}
-
-      <button onClick={() => navigate("/")} className="homeButton">
-        Home
-      </button>
+      <BackButton />
     </div>
   );
 }

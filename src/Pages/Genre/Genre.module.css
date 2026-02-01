@@ -79,22 +79,4 @@ html, body {
   
   .dropdown li:last-child {
   border-bottom: none;
-  } 
-
-  .homeButton {
-    position: fixed;  
-    top: 65px; 
-    right: 20px;         
-    background-color: #4CAF50;  
-    color: white;               
-    padding: 8px 15px;            
-    border: none;                
-    border-radius: 5px;          
-    cursor: pointer;            
-    font-size: 14px;             
-    font-weight: bold;           
-}
-  
-  .homeButton:hover {
-    background-color: #45a049; 
   }
