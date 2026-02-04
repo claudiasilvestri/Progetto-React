@@ -2,8 +2,10 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import styles from "./game.module.css";
 import GameImage from "../../components/GameImage";
-import noTrailer from "../../Assets/No-Trailer.jpg";
 import BackButton from "../../components/BackButton";
+import Spinner from "../../components/Spinner";
+import noTrailer from "../../Assets/No-Trailer.jpg";
+
 
 const API_KEY = "c6d86a1b0cfc40fa8902c3705680c2ed";
 const YT_KEY = import.meta.env.VITE_YOUTUBE_KEY;
@@ -102,33 +104,34 @@ export default function Game() {
           const goodKeywords = [
             "official trailer",
             "launch trailer",
-            "announcement trailer",
             "reveal trailer",
+            "announcement trailer",
+          ];
+
+          const gamingKeywords = [
+            "game",
+            "videogame",
+            "pc",
+            "xbox",
+            "playstation",
+            "nintendo",
+            "steam",
           ];
 
           const badKeywords = [
-            "gameplay",
-            "walkthrough",
-            "review",
+            "movie",
+            "film",
+            "soundtrack",
             "reaction",
-            "mod",
-            "fan made",
-          ];
-
-          const officialChannels = [
-            "PlayStation",
-            "Xbox",
-            "IGN",
-            "Nintendo",
-            "Bandai Namco",
-            "Ubisoft",
-            "EA",
-            "Bethesda",
+            "review",
+            "walkthrough",
+            "episode",
+            "netflix",
           ];
 
           return items.find((video) => {
             const title = video.snippet.title.toLowerCase();
-            const channel = video.snippet.channelTitle.toLowerCase();
+            const description = video.snippet.description.toLowerCase();
 
             const containsGame = title.includes(name);
 
@@ -136,26 +139,26 @@ export default function Game() {
               title.includes(k)
             );
 
-            const hasBadKeyword = badKeywords.some((k) =>
-              title.includes(k)
-            );
+            const hasGamingContext =
+              gamingKeywords.some((k) => title.includes(k)) ||
+              gamingKeywords.some((k) => description.includes(k));
 
-            const isOfficialChannel = officialChannels.some((c) =>
-              channel.includes(c.toLowerCase())
+            const hasBadKeyword = badKeywords.some(
+              (k) => title.includes(k) || description.includes(k)
             );
 
             return (
               containsGame &&
               hasGoodKeyword &&
-              !hasBadKeyword &&
-              isOfficialChannel
+              hasGamingContext &&
+              !hasBadKeyword
             );
           });
         };
 
         const ytRes = await fetch(
           `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${encodeURIComponent(
-            gameData.name + " official trailer"
+            gameData.name + " videogame official trailer"
           )}&key=${YT_KEY}&maxResults=5&type=video`
         );
 
@@ -170,7 +173,7 @@ export default function Game() {
           if (bestTrailer) {
             setYoutubeId(bestTrailer.id.videoId);
           } else {
-            setYoutubeId(ytData.items[0].id.videoId);
+            setYoutubeId(null);
           }
         }
       } catch (error) {
@@ -183,9 +186,9 @@ export default function Game() {
     fetchData();
   }, [id]);
 
-  if (loading) {
-    return <div className={styles.loading}>Caricamento...</div>;
-  }
+ if (loading) {
+  return <Spinner />;
+}
 
   return (
     <div className={styles.centeredContainer}>

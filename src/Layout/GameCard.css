@@ -67,3 +67,62 @@
   border-radius: 5px;
   text-align: left;
 }
+
+.platform-icons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  font-size: 22px;
+  margin-bottom: 12px;
+}
+
+.platform-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 28px;
+  width: 28px;
+  transition: transform 0.2s ease;
+}
+
+.platform-icon svg {
+  display: block;
+}
+
+.platform-icon:hover {
+  transform: scale(1.2);
+}
+
+.platform-icon.pc {
+  color: #00aaff;
+  filter: drop-shadow(0 0 3px rgba(0, 170, 255, 0.5));
+}
+
+.platform-icon.playstation {
+  color: #003cff;
+  filter: drop-shadow(0 0 3px rgba(0, 60, 255, 0.5));
+}
+
+.platform-icon.xbox {
+  color: #00c853;
+  filter: drop-shadow(0 0 3px rgba(0, 200, 83, 0.5));
+}
+
+.platform-icon.nintendo {
+  color: #ff2d2d;
+  filter: drop-shadow(0 0 3px rgba(255, 45, 45, 0.6));
+}
+
+.platform-icon.nintendo svg {
+  font-size: 30px;
+}
+
+.platform-icon.mac {
+  color: #cccccc;
+  filter: drop-shadow(0 0 3px rgba(200, 200, 200, 0.4));
+}
+
+.platform-icon.mac svg {
+  font-size: 24px;
+}

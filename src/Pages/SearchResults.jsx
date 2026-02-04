@@ -2,7 +2,7 @@ import { useParams, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import "../Layout/SearchResults.css";
 import GameImage from "../components/GameImage";
-
+import Spinner from "../components/Spinner";
 import BackButton from "../components/BackButton";
 
 export default function SearchResults() {
@@ -33,42 +33,40 @@ export default function SearchResults() {
     fetchResults();
   }, [query]);
 
+  if (loading) {
+    return <Spinner />;
+  }
+
   return (
     <div className="search-results-container">
-      {loading ? (
-        <p>Caricamento...</p>
-      ) : (
-        <div className="search-results">
-          {results.length === 0 ? (
-            <p>Nessun risultato trovato.</p>
-          ) : (
-            results.map((game) => (
-              <div key={game.id} className="game_card">
-                <Link
-                  to={`/games/${game.id}/${game.name}`}
-                  className="game-link"
-                >
-                  <GameImage image={game.background_image} />
+      <div className="search-results">
+        {results.length === 0 ? (
+          <p>Nessun risultato trovato.</p>
+        ) : (
+          results.map((game) => (
+            <div key={game.id} className="game_card">
+              <Link to={`/games/${game.id}/${game.name}`} className="game-link">
+                <GameImage image={game.background_image} />
 
-                  <h3 className="game_title">{game.name}</h3>
+                <h3 className="game_title">{game.name}</h3>
 
-                  <div className="game_genres">
-                    {game.genres?.map((g) => g.name).join(", ")}
-                  </div>
+                <div className="game_genres">
+                  {game.genres?.map((g) => g.name).join(", ")}
+                </div>
 
-                  <div className="game_info">
-                    <p>Anno: {game.released}</p>
-                    <p>
-                      Piattaforme:{" "}
-                      {game.platforms?.map((p) => p.platform.name).join(", ")}
-                    </p>
-                  </div>
-                </Link>
-              </div>
-            ))
-          )}
-        </div>
-      )}
+                <div className="game_info">
+                  <p>Anno: {game.released}</p>
+                  <p>
+                    Piattaforme:{" "}
+                    {game.platforms?.map((p) => p.platform.name).join(", ")}
+                  </p>
+                </div>
+              </Link>
+            </div>
+          ))
+        )}
+      </div>
+
       <BackButton />
     </div>
   );
