@@ -34,7 +34,7 @@
   margin-bottom: 15px;
 }
 
-p {
+.gameCard p {
   font-family: "Playfair Display", serif;
   font-size: 16px;
   text-align: justify;
@@ -78,15 +78,9 @@ p {
   height: 230px;
 }
 
-.carouselImageWrapper span {
-  width: 100% !important;
-  height: 100% !important;
-  display: block !important;
-}
-
 .carouselImageWrapper img {
-  width: 100% !important;
-  height: 100% !important;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
   object-position: center;
   border-radius: 14px;
@@ -124,4 +118,71 @@ p {
 
 .rightButton {
   right: 12px;
+}
+
+.trailerButton {
+  margin-top: 10px;
+  margin-bottom: 25px;
+  padding: 12px 22px;
+
+  background-color: #f20065;
+  border: 3px solid #2e7d32;
+  border-radius: 14px;
+
+  color: white;
+  font-family: "Playfair Display", serif;
+  font-size: 18px;
+  font-weight: bold;
+
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.trailerButton:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 12px rgba(46, 125, 50, 0.6);
+}
+
+.trailerVideo {
+  width: 520px;
+  height: 300px;
+  border-radius: 14px;
+  border: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+.noTrailerBox {
+  width: 520px;
+  height: 300px;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 2px solid #333;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  margin-top: 10px;
+  margin-bottom: 25px;
+}
+
+.noTrailerImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.modalContent {
+  background: black;
+  padding: 12px;
+  border-radius: 16px;
 }
