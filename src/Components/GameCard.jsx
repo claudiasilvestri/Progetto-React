@@ -1,14 +1,20 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
+import { supabase } from "../Supabase/client";
+import { useSession } from "../Context/SessionContext";
 import GameImage from "./GameImage";
 import "../Layout/GameCard.css";
-
+import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { FaWindows, FaPlaystation, FaXbox, FaApple } from "react-icons/fa";
 import { SiNintendo } from "react-icons/si";
 
 export default function GameCard({ game }) {
   const navigate = useNavigate();
+  const { user } = useSession();
+
   const [hidden, setHidden] = useState(true);
+  const [isFavorite, setIsFavorite] = useState(false);
+  const [loadingFav, setLoadingFav] = useState(false);
 
   const genres = game.genres.map((genre) => genre.name).join(", ");
 
@@ -24,6 +30,59 @@ export default function GameCard({ game }) {
     return null;
   };
 
+  useEffect(() => {
+    if (!user) {
+      setIsFavorite(false);
+      return;
+    }
+
+    const checkFavorite = async () => {
+      const { data } = await supabase
+        .from("favorites")
+        .select("id")
+        .eq("game_id", game.id)
+        .limit(1)
+        .maybeSingle();
+
+      setIsFavorite(!!data);
+    };
+
+    checkFavorite();
+  }, [user, game.id]);
+
+  const handleToggleFavorite = async (e) => {
+    e.stopPropagation();
+
+    if (!user) {
+      alert("Devi effettuare il login per usare i preferiti ❤️");
+      return;
+    }
+
+    if (loadingFav) return;
+    setLoadingFav(true);
+
+    if (!isFavorite) {
+      const { error } = await supabase.from("favorites").insert({
+        user_id: user.id,
+        game_id: game.id,
+        game_name: game.name,
+        game_image: game.background_image ?? null,
+      });
+
+      if (!error) setIsFavorite(true);
+    } else {
+      const { error } = await supabase
+        .from("favorites")
+        .delete()
+        .eq("user_id", user.id)
+        .eq("game_id", game.id);
+
+      if (!error) setIsFavorite(false);
+    }
+
+    setLoadingFav(false);
+  };
+
   return (
     <article
       className="game_card"
@@ -31,6 +90,14 @@ export default function GameCard({ game }) {
       onMouseLeave={() => setHidden(true)}
       onClick={() => navigate(`/games/${game.id}/${game.name}`)}
     >
+      <button
+        className="favorite_btn"
+        onClick={handleToggleFavorite}
+        disabled={loadingFav}
+      >
+        {isFavorite ? <FaHeart /> : <FaRegHeart />}
+      </button>
+
       <div className="game_genres">{genres}</div>
 
       <div className="platform-icons">

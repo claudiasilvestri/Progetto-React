@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "../../Layout/signin.css";
-import supabase from "../../supabase/client";
+import { supabase } from "../../Supabase/client";
 import { Toaster, toast } from "sonner";
 
 const SignIn = () => {
@@ -124,13 +124,3 @@ const SignIn = () => {
 };
 
 export default SignIn;
-
-
-
-
-
-
-
-
-
-

@@ -1,6 +1,6 @@
 import { RouterProvider } from "react-router-dom";
-import { SessionContextProvider } from "./Context/SessionContext";  
-import router from './Routes';
+import { SessionContextProvider } from "./Context/SessionContext";
+import router from "./Routes";
 
 export function App() {
   return (

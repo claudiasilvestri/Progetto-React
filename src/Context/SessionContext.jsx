@@ -1,5 +1,5 @@
-import { createContext, useEffect, useState } from "react";
-import supabase from "../supabase/client";
+import { createContext, useContext, useEffect, useState } from "react";
+import { supabase } from "../Supabase/client";
 
 export const SessionContext = createContext(null);
 
@@ -14,9 +14,11 @@ export function SessionContextProvider({ children }) {
 
     getUser();
 
-    const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
-      setUser(session?.user || null);
-    });
+    const { data: listener } = supabase.auth.onAuthStateChange(
+      (_event, session) => {
+        setUser(session?.user ?? null);
+      }
+    );
 
     return () => {
       listener?.subscription.unsubscribe();
@@ -30,4 +32,6 @@ export function SessionContextProvider({ children }) {
   );
 }
 
-
+export function useSession() {
+  return useContext(SessionContext);
+}

@@ -19,6 +19,7 @@ import SearchResults from "../Pages/SearchResults";
 import SignUp from "../Pages/SignUp";
 import SignIn from "../Pages/SignIn";
 import Account from "../Pages/Account";
+import Favorites from "../Pages/Favorites";
 
 import "../Layout/Layout.css";
 
@@ -69,6 +70,7 @@ const router = createBrowserRouter(
         <Route path="search/:query" element={<SearchResults />} />
         <Route path="login" element={<SignIn />} />
         <Route path="register" element={<SignUp />} />
+        <Route path="favorites" element={<Favorites />} />
 
         <Route element={<ProtectedRoute />}>
           <Route path="account" element={<Account />} />

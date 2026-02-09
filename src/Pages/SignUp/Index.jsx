@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "../../layout/signup.css";
-import supabase from "../../supabase/client";
+import { supabase } from "../../Supabase/client";
 import { Toaster, toast } from 'sonner';
 
 const SignUp = () => {
