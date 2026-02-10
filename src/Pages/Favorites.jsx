@@ -1,66 +1,114 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "../Supabase/client";
-import { useContext } from "react";
 import { SessionContext } from "../Context/SessionContext";
+import GameCard from "../Components/GameCard";
+import Spinner from "../Components/Spinner";
+import styles from "./Home/Home.module.css";
+import "../Layout/BackButton.css";
+
+const BASE_URL = "https://api.rawg.io/api/games/";
+const API_KEY = "c6d86a1b0cfc40fa8902c3705680c2ed";
 
 export default function Favorites() {
   const { user } = useContext(SessionContext);
   const navigate = useNavigate();
 
   const [favorites, setFavorites] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [games, setGames] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    if (!user) {
-      setLoading(false);
-      return;
-    }
+    if (!user) return;
 
     const fetchFavorites = async () => {
-      const { data, error } = await supabase
+      setLoading(true);
+
+      const { data } = await supabase
         .from("favorites")
-        .select("*")
+        .select("game_id")
+        .eq("user_id", user.id)
         .order("created_at", { ascending: false });
 
-      if (!error) {
-        setFavorites(data || []);
-      }
-
-      setLoading(false);
+      setFavorites(data || []);
+      setLoading(false); 
     };
 
     fetchFavorites();
   }, [user]);
 
-  if (!user) {
-    return <p>Effettua il login per vedere i tuoi preferiti ❤️</p>;
-  }
+  useEffect(() => {
+    if (!user) return;
 
-  if (loading) {
-    return <p>Caricamento...</p>;
-  }
+    if (favorites.length === 0) {
+      setGames([]);
+      return;
+    }
+
+    const fetchGames = async () => {
+      setLoading(true);
+
+      try {
+        const requests = favorites.map((fav) =>
+          fetch(`${BASE_URL}${fav.game_id}?key=${API_KEY}`).then((res) =>
+            res.json()
+          )
+        );
+
+        const results = await Promise.all(requests);
+        setGames(results.filter((game) => game?.id));
+      } catch (error) {
+        console.error("Error loading favorites:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchGames();
+  }, [favorites, user]);
 
   return (
-    <div style={{ padding: "20px" }}>
-      <button
-        onClick={() => navigate(-1)}
-        style={{ marginBottom: "20px" }}
-      >
-        ← Back
-      </button>
+    <div className={`${styles.main} ${styles.container}`}>
+      <div className={styles.content}>
+        <h1 className={styles.title}>Favorites</h1>
 
-      <h2>I miei preferiti ❤️</h2>
+        {!user ? (
+          <p className={styles.empty}>
+            Please log in to view your favorites ❤️
+          </p>
+        ) : (
+          <>
+            <button
+              className="backButtonFixed"
+              onClick={() => navigate(-1)}
+            >
+              ← Back
+            </button>
 
-      {favorites.length === 0 ? (
-        <p>Nessun gioco nei preferiti.</p>
-      ) : (
-        <ul>
-          {favorites.map((game) => (
-            <li key={game.id}>{game.game_name}</li>
-          ))}
-        </ul>
-      )}
+            {loading ? (
+              <Spinner />
+            ) : games.length === 0 ? (
+              <p className={styles.empty}>
+                You haven’t added any favorites yet ❤️
+              </p>
+            ) : (
+              <div className={styles.games_wrapper}>
+                {games.map((game) => (
+                  <GameCard
+                    key={game.id}
+                    game={game}
+                    onRemove={() =>
+                      setGames((prev) =>
+                        prev.filter((g) => g.id !== game.id)
+                      )
+                    }
+                  />
+                ))}
+              </div>
+            )}
+          </>
+        )}
+      </div>
     </div>
   );
 }

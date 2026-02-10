@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import styles from "./Home.module.css";
-import GameCard from "../../components/GameCard";
-import Spinner from "../../components/Spinner";
+import GameCard from "../../Components/GameCard";
+import Spinner from "../../Components/Spinner";
 
 const BASE_URL =
   "https://api.rawg.io/api/games?key=c6d86a1b0cfc40fa8902c3705680c2ed&dates=2024-01-01,2024-12-31&page_size=20";

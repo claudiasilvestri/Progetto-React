@@ -8,7 +8,7 @@ import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { FaWindows, FaPlaystation, FaXbox, FaApple } from "react-icons/fa";
 import { SiNintendo } from "react-icons/si";
 
-export default function GameCard({ game }) {
+export default function GameCard({ game, onRemove }) {
   const navigate = useNavigate();
   const { user } = useSession();
 
@@ -40,6 +40,7 @@ export default function GameCard({ game }) {
       const { data } = await supabase
         .from("favorites")
         .select("id")
+        .eq("user_id", user.id)
         .eq("game_id", game.id)
         .limit(1)
         .maybeSingle();
@@ -54,7 +55,7 @@ export default function GameCard({ game }) {
     e.stopPropagation();
 
     if (!user) {
-      alert("Devi effettuare il login per usare i preferiti ❤️");
+      alert("Please log in to use favorites ❤️");
       return;
     }
 
@@ -77,7 +78,10 @@ export default function GameCard({ game }) {
         .eq("user_id", user.id)
         .eq("game_id", game.id);
 
-      if (!error) setIsFavorite(false);
+      if (!error) {
+        setIsFavorite(false);
+        if (onRemove) onRemove();
+      }
     }
 
     setLoadingFav(false);
@@ -115,7 +119,7 @@ export default function GameCard({ game }) {
       <h4 className="game_title">{game.name}</h4>
 
       {hidden ? (
-        <small className="read_more">Read more...</small>
+        <small className="read_more">Read more</small>
       ) : (
         <div className="game_info">
           <p>
