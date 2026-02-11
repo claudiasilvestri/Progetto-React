@@ -13,6 +13,7 @@ export default function Navbar() {
       const {
         data: { user },
       } = await supabase.auth.getUser();
+
       setUser(user);
     };
 
@@ -31,6 +32,10 @@ export default function Navbar() {
 
   const signOut = async () => {
     await supabase.auth.signOut();
+
+    localStorage.removeItem("email");
+    localStorage.removeItem("password");
+
     setUser(null);
   };
 
@@ -57,12 +62,17 @@ export default function Navbar() {
           </>
         ) : (
           <>
+            <span className="welcome-user">
+              Welcome, {user?.user_metadata?.username || "Player"} 👋🏻
+            </span>
+
             <button
               className="auth-btn"
               onClick={() => (window.location.href = "/favorites")}
             >
               ❤️ Favorites
             </button>
+
             <button onClick={signOut} className="auth-btn">
               Logout
             </button>

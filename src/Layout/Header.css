@@ -78,3 +78,13 @@
 .search-btn:hover {
   background-color: #45a049;
 }
+
+.welcome-user {
+  color: #f20065;
+  font-weight: 800;
+  margin-right: 20px;
+  font-size: 17px;
+  letter-spacing: 0.6px;
+  text-shadow: 0 0 6px rgba(242, 0, 101, 0.4);
+}
+

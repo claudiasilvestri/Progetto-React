@@ -79,6 +79,7 @@ input:focus {
   color: #f20065;
   display: flex;
   align-items: center;
+  gap: 10px;
 }
 
 .switch {
@@ -142,12 +143,27 @@ input:checked + .slider:before {
   text-decoration: underline;
 }
 
+.success_message {
+  margin-bottom: 25px;
+  padding: 14px 16px;
+  background-color: rgba(76, 175, 80, 0.15);
+  border: 1px solid #4CAF50;
+  color: #4CAF50;
+  border-radius: 6px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 1.6;
+  animation: fadeIn 0.3s ease-in-out;
+}
 
-
-
-
-
-
-
-
-
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

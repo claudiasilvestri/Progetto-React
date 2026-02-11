@@ -9,7 +9,9 @@ const SignIn = () => {
     email: "",
     password: "",
   });
+
   const [rememberMe, setRememberMe] = useState(false);
+  const [successMessage, setSuccessMessage] = useState(false);
 
   const navigate = useNavigate();
 
@@ -42,7 +44,7 @@ const SignIn = () => {
     event.preventDefault();
     const { email, password } = formData;
 
-    const { data, error } = await supabase.auth.signInWithPassword({
+    const { error } = await supabase.auth.signInWithPassword({
       email,
       password,
     });
@@ -58,17 +60,27 @@ const SignIn = () => {
         localStorage.removeItem("password");
       }
 
+      setSuccessMessage(true);
       setFormData({ email: "", password: "" });
-      toast.success("Login successful");
 
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      navigate("/");
+      setTimeout(() => {
+        navigate("/");
+      }, 2000);
     }
   };
 
   return (
     <div className="signin-container">
+      {successMessage && (
+        <div className="success_message">
+          Login successful!
+          <br />
+          Redirecting to Home...
+        </div>
+      )}
+
       <h2>Login</h2>
+
       <form onSubmit={handleSubmit} className="signin-form">
         <div className="form-group">
           <label htmlFor="email">Email</label>
@@ -107,15 +119,17 @@ const SignIn = () => {
               />
               <span className="slider"></span>
             </div>
-            Remember me
+            <span>Remember me</span>
           </label>
         </div>
 
-        <button type="submit" className="signin-button">Login now</button>
+        <button type="submit" className="signin-button">
+          Login now
+        </button>
       </form>
 
       <p className="dont-have-account">
-        Don't have an account? <Link to="/signup">Sign up</Link>
+        Don't have an account? <Link to="/register">Sign up</Link>
       </p>
 
       <Toaster position="bottom-center" />
